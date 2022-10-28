@@ -17,9 +17,11 @@ public class FileUtils {
 	        if (fileEntry.isDirectory()) {
 	        	getFileName(fileEntry);
 	        } else {
-	        	if(fileEntry.getName().contains(".exe") || fileEntry.getName().contains(".jar"))
-	            System.out.println(fileEntry.getName());
-	            nomiFile.add(fileEntry.getName());
+	        	if(!fileEntry.getName().contains(".exe") || !fileEntry.getName().contains(".jar")) {
+	        		System.out.println(fileEntry.getName());
+		            nomiFile.add(fileEntry.getName());
+	        	}
+	            
 	        }
 	    }
 	    return nomiFile;
