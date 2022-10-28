@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestioreFile {
+public class FileUtils {
 	
 	public List<String> getFileName(final File folder) {
 		List<String> nomiFile = new ArrayList<String>();
@@ -19,6 +19,29 @@ public class GestioreFile {
 	    return nomiFile;
 	}
 	
+	public String getOggettoMail(String file){		
+		String[] ogg = file.split("-");
+		
+	
+		return "BP " + ogg[1];
+	}
+	
+	
+//	public String getJarPath() {
+//	String jarPath = "";
+//	try {
+//		jarPath = Main.class
+//		          .getProtectionDomain()
+//		          .getCodeSource()
+//		          .getLocation()
+//		          .toURI()
+//		          .getPath();
+//	} catch (URISyntaxException e) {
+//		e.printStackTrace();
+//	}
+//	return jarPath;
+//}
+
 
 
 }
