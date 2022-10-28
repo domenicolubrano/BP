@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: fabia
-Build-Jdk: 17.0.4.1
+Built-By: ddant
+Build-Jdk: 17.0.4
 Created-By: Maven Integration for Eclipse
 

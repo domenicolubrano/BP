@@ -6,12 +6,18 @@ import java.util.List;
 
 public class FileUtils {
 	
-	public List<String> getFileName(final File folder) {
+	/**
+	 * 
+	 * @param Percorso cartella
+	 * @return lista contenente i nomi dei file
+	 */
+	public static List<String> getFileName(final File folder) {
 		List<String> nomiFile = new ArrayList<String>();
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory()) {
 	        	getFileName(fileEntry);
 	        } else {
+	        	if(fileEntry.getName().contains(".exe") || fileEntry.getName().contains(".jar"))
 	            System.out.println(fileEntry.getName());
 	            nomiFile.add(fileEntry.getName());
 	        }
@@ -19,29 +25,18 @@ public class FileUtils {
 	    return nomiFile;
 	}
 	
-	public String getOggettoMail(String file){		
+	/**
+	 * 
+	 * @param nome file
+	 * @return oggetto mail formattato BP Mese Anno
+	 */
+	public static String getOggettoMail(String file){		
 		String[] ogg = file.split("-");
 		
 	
 		return "BP " + ogg[1];
 	}
 	
-	
-//	public String getJarPath() {
-//	String jarPath = "";
-//	try {
-//		jarPath = Main.class
-//		          .getProtectionDomain()
-//		          .getCodeSource()
-//		          .getLocation()
-//		          .toURI()
-//		          .getPath();
-//	} catch (URISyntaxException e) {
-//		e.printStackTrace();
-//	}
-//	return jarPath;
-//}
-
 
 
 }

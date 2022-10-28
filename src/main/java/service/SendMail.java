@@ -18,8 +18,11 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class SendMail {
+	
+	private static String email = "d.lubranolobianco@3em.it";
+	private static String password = "DmcLbLb@12";
 
-	public static void send() throws AddressException, MessagingException {
+	public static void send(String destinatario, String oggetto) throws AddressException, MessagingException {
 	Properties prop = new Properties();
 	
 	prop.put("mail.smtp.auth", true);
@@ -31,14 +34,14 @@ public class SendMail {
 	Session session = Session.getInstance(prop, new Authenticator() {
 	    @Override
 	    protected PasswordAuthentication getPasswordAuthentication() {
-	        return new PasswordAuthentication("d.lubranolobianco@3em.it", "DmcLbLb@12");
+	        return new PasswordAuthentication(email, password);
 	    }
 	});
 	
 	
 	Message message = new MimeMessage(session);
 	try {
-		message.setFrom(new InternetAddress("d.lubranolobianco@3em.it"));
+		message.setFrom(new InternetAddress(email));
 	} catch (AddressException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
@@ -47,9 +50,9 @@ public class SendMail {
 		e1.printStackTrace();
 	}
 	message.setRecipients(
-	  Message.RecipientType.TO, InternetAddress.parse("i.scamardella@3em.it"));
+	  Message.RecipientType.TO, InternetAddress.parse(destinatario));
 	try {
-		message.setSubject("Mail Subject");
+		message.setSubject(oggetto);
 	} catch (MessagingException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
