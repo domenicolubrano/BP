@@ -20,3 +20,8 @@ label.setForeground(Color.RED)
 ImageIcon img = new ImageIcon(pathToFileOnDisk); 
 frame.setIconImage(img.getImage());
 ```
+
+
+## JAR to EXE
+- [launch4j](https://launch4j.sourceforge.net/)
+- [jsmooth](https://jsmooth.sourceforge.net/) 
