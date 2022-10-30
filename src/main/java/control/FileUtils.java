@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import service.GUI;
+
 public class FileUtils {
 	
 	/**
@@ -19,11 +21,13 @@ public class FileUtils {
 	        } else {
 	        	if(!fileEntry.getName().contains(".exe") || !fileEntry.getName().contains(".jar")) {
 	        		System.out.println(fileEntry.getName());
+	        		GUI.logTextArea.append(" [INFO] -> File Trovato: " + fileEntry.getName() + "\n");
 		            nomiFile.add(fileEntry.getName());
 	        	}
 	            
 	        }
 	    }
+	    
 	    return nomiFile;
 	}
 	
@@ -35,8 +39,12 @@ public class FileUtils {
 	public static String getOggettoMail(String file){		
 		String[] ogg = file.split("-");
 		
-	
-		return "BP " + ogg[1];
+		try {
+			return "BP " + ogg[1];
+		}catch(Exception e) {
+			return "BP";
+		}
+		
 	}
 	
 
