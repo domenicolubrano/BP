@@ -49,15 +49,17 @@ public class GUI extends JFrame implements ActionListener {
     	
     	
     	JPanel panel = new JPanel();
-        panel.setBackground(Color.LIGHT_GRAY);
-        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+    	panel.setBackground(new Color(255, 255, 255));
+        panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panel.setLayout(new GridLayout(0, 1));
-    	
+
     	
     	
         JButton button = new JButton("Manda Buste Paga presenti nella cartella");
         //button.addActionListener(this);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setBackground(new Color(22,158,255));
+        button.setForeground(new Color(255,255,255));
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 bottoneActionPerformed(evt);
@@ -68,6 +70,8 @@ public class GUI extends JFrame implements ActionListener {
         
         JButton saveLog = new JButton("Salva log");
         saveLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        saveLog.setBackground(new Color(22,158,255));
+        saveLog.setForeground(new Color(255,255,255));
         saveLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveLogActionPerformed(evt);
