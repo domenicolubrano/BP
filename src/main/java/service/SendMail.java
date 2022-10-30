@@ -1,7 +1,5 @@
 package service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -16,7 +14,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.swing.JOptionPane;
 
 public class SendMail {
 	
@@ -44,12 +41,10 @@ public class SendMail {
 	try {
 		message.setFrom(new InternetAddress(email));
 	} catch (AddressException e1) {
-		//JOptionPane.showMessageDialog(null, e1.getStackTrace());
-		GUI.logTextArea.append(e1.getMessage() + "\n\n");
+		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
 	} catch (MessagingException e1) {
-		//JOptionPane.showMessageDialog(null, e1.getStackTrace());
-		GUI.logTextArea.append(e1.getMessage() + "\n\n");
+		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
 	}
 	message.setRecipients(
@@ -57,7 +52,6 @@ public class SendMail {
 	try {
 		message.setSubject(oggetto);
 	} catch (MessagingException e) {
-		//JOptionPane.showMessageDialog(null, e.getStackTrace());
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
 	}
@@ -68,7 +62,6 @@ public class SendMail {
 	try {
 		mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
 	} catch (MessagingException e) {
-		//JOptionPane.showMessageDialog(null, e.getStackTrace());
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
 	}
@@ -77,7 +70,6 @@ public class SendMail {
 	try {
 		multipart.addBodyPart(mimeBodyPart);
 	} catch (MessagingException e) {
-		//JOptionPane.showMessageDialog(null, e.getStackTrace());
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
 	}
@@ -85,7 +77,6 @@ public class SendMail {
 	try {
 		message.setContent(multipart);
 	} catch (MessagingException e) {
-		//JOptionPane.showMessageDialog(null, e.getStackTrace());
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
 	}
@@ -105,7 +96,6 @@ public class SendMail {
 	try {
 		Transport.send(message);
 	} catch (MessagingException e) {
-		//JOptionPane.showMessageDialog(null, e.getStackTrace());
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
 	}

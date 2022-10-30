@@ -74,11 +74,8 @@ public class GUI extends JFrame implements ActionListener {
             }
         });
         panel.add(saveLog);
-        
-        
-        
+
         panel.add(separatore);
-      //panel.add(label);
         
 
         // text area log
@@ -129,12 +126,6 @@ public class GUI extends JFrame implements ActionListener {
                 .addContainerGap())
         );
 
-        
-        
-        
-        
-        
-        
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -158,6 +149,7 @@ public class GUI extends JFrame implements ActionListener {
         // set icona
         ImageIcon img = new ImageIcon(".\\logo.png"); 
         frame.setIconImage(img.getImage());
+        
         
         // set up the frame and display it
         frame.add(panel, BorderLayout.CENTER);
@@ -224,6 +216,9 @@ public class GUI extends JFrame implements ActionListener {
 		}    	
     }
 
+    
+    
+    
     // azione generale effettuata
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
