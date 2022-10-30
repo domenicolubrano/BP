@@ -1,4 +1,18 @@
 package service;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.swing.BorderFactory;
@@ -14,17 +28,12 @@ import javax.swing.JTextArea;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
-import java.util.List;
-
 import control.FileUtils;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.File;
-
+@SuppressWarnings("serial")
 public class GUI extends JFrame implements ActionListener {
-  //  private int clicks = 0;
-    private static JLabel label = new JLabel();
+//  private int clicks = 0;
+    //private static JLabel label = new JLabel();
     private static JFrame frame = new JFrame();
     private static JScrollPane pannelloScroll = new JScrollPane();
     public static JTextArea logTextArea = new JTextArea();
@@ -45,18 +54,28 @@ public class GUI extends JFrame implements ActionListener {
     	
     	
     	
-        // the clickable button
         JButton button = new JButton("Manda Buste Paga presenti nella cartella");
-        button.addActionListener(this);
+        //button.addActionListener(this);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 bottoneActionPerformed(evt);
             }
         });
-        
-        // the panel with the button and text
         panel.add(button);
+        
+        
+        JButton saveLog = new JButton("Salva log");
+        saveLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        saveLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveLogActionPerformed(evt);
+            }
+        });
+        panel.add(saveLog);
+        
+        
+        
         panel.add(separatore);
       //panel.add(label);
         
@@ -101,9 +120,20 @@ public class GUI extends JFrame implements ActionListener {
                     .addComponent(button, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pannelloScroll, GroupLayout.Alignment.TRAILING)
                     .addComponent(labelTitolo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelIstruzioni1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelIstruzioni1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(saveLog))
+                 )
                 .addContainerGap())
         );
+
+        
+        
+        
+        
+        
+        
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -119,6 +149,7 @@ public class GUI extends JFrame implements ActionListener {
                 .addComponent(button)
                 .addGap(24, 24, 24)
                 .addComponent(pannelloScroll, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveLog)
                 .addContainerGap())
         );
         panel.setLayout(layout);
@@ -167,7 +198,26 @@ public class GUI extends JFrame implements ActionListener {
 	    
 	    logTextArea.append("\n\n ============ [FINE] ============\n");
     }
+    
+    // salva log premuto
+    public void saveLogActionPerformed(ActionEvent e) {
+    	String log = logTextArea.getText();
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm.ss");  
+    	LocalDateTime oggi = LocalDateTime.now();  
 
+    	FileWriter logFile;
+		try {
+			logFile = new FileWriter("./log-" + formatter.format(oggi) + ".txt");
+			logFile.write(log);
+	    	logFile.close();
+	    	JOptionPane.showMessageDialog(null, "Log Salvato");
+		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
+			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage());
+			e1.printStackTrace();
+		}    	
+    }
 
     // azione generale effettuata
 	public void actionPerformed(ActionEvent e) {

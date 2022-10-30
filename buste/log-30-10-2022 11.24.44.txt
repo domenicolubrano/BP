@@ -1,0 +1,20 @@
+
+
+ ============ [INIZIO] ============
+
+ [INFO] -> File Trovato: 8-AGOSTO 2021 - LUBRANO LOBIANCO DOMENICO - Copia.pdf
+ [INFO] -> File Trovato: 8-AGOSTO 2021 - LUBRANO LOBIANCO DOMENICO.pdf
+ [INFO] -> File Trovato: bp.jar
+
+
+ [INFO] -> Nessun altro file trovato
+
+ [ERRORE] ==> Could not connect to SMTP host: pop.3em.it, port: 25, response: 554
+
+ [ERRORE] ==> Could not connect to SMTP host: pop.3em.it, port: 25, response: 554
+
+ [ERRORE] ==> Could not connect to SMTP host: pop.3em.it, port: 25, response: 554
+
+
+
+ ============ [FINE] ============
