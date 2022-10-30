@@ -27,5 +27,3 @@ frame.setIconImage(img.getImage());
 - [jsmooth](https://jsmooth.sourceforge.net/) 
 
 
-## GUI builder
-[jformdesigner](https://www.formdev.com/jformdesigner/download/)
