@@ -17,6 +17,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -154,7 +155,9 @@ public class GUI extends JFrame implements ActionListener {
         );
         panel.setLayout(layout);
         
-        
+        // set icona
+        ImageIcon img = new ImageIcon(".\\logo.png"); 
+        frame.setIconImage(img.getImage());
         
         // set up the frame and display it
         frame.add(panel, BorderLayout.CENTER);
@@ -199,11 +202,13 @@ public class GUI extends JFrame implements ActionListener {
 	    logTextArea.append("\n\n ============ [FINE] ============\n");
     }
     
+    
+    
     // salva log premuto
     public void saveLogActionPerformed(ActionEvent e) {
     	String log = logTextArea.getText();
     	
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH.mm.ss");  
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH.mm.ss");  
     	LocalDateTime oggi = LocalDateTime.now();  
 
     	FileWriter logFile;
@@ -214,7 +219,7 @@ public class GUI extends JFrame implements ActionListener {
 	    	JOptionPane.showMessageDialog(null, "Log Salvato");
 		} catch (IOException e1) {
 			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
-			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage());
+			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
 			e1.printStackTrace();
 		}    	
     }
