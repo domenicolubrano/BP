@@ -2,6 +2,7 @@ package service;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,8 @@ public class GUI extends JFrame implements ActionListener {
     private static JSeparator separatore = new JSeparator();
     private static JLabel labelIstruzioni = new JLabel();
     private static JLabel labelIstruzioni1 = new JLabel();
-    
+    private static JLabel labelIstruzioni2 = new JLabel();
+    private static JLabel labelSuccess = new JLabel();
 
     public GUI() {
     	
@@ -60,6 +62,7 @@ public class GUI extends JFrame implements ActionListener {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setBackground(new Color(22,158,255));
         button.setForeground(new Color(255,255,255));
+        button.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 bottoneActionPerformed(evt);
@@ -68,17 +71,17 @@ public class GUI extends JFrame implements ActionListener {
         panel.add(button);
         
         
-        JButton saveLog = new JButton("Salva log");
+        JButton saveLog = new JButton("Salva Log");
         saveLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
         saveLog.setBackground(new Color(22,158,255));
         saveLog.setForeground(new Color(255,255,255));
-        saveLog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        saveLog.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        saveLog.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 saveLogActionPerformed(evt);
             }
         });
         panel.add(saveLog);
-
         panel.add(separatore);
         
 
@@ -92,23 +95,37 @@ public class GUI extends JFrame implements ActionListener {
         
         
         // titolo
-        labelTitolo.setFont(new Font("Dialog", 1, 24)); // NOI18N
         labelTitolo.setHorizontalAlignment(SwingConstants.CENTER);
         labelTitolo.setText("Invia Buste Paga");
+        labelTitolo.setFont(new Font("Leelawadee UI", 1, 24));
+        labelTitolo.setForeground(new Color(22,158,255));
         panel.add(labelTitolo);
         
         
         // istruzioni
-        labelIstruzioni.setFont(new Font("Dialog", 1, 14)); // NOI18N
         labelIstruzioni.setHorizontalAlignment(SwingConstants.CENTER);
+        labelIstruzioni.setFont(new Font("Leelawadee UI", 1, 18));
         labelIstruzioni.setText("Inserire il file nella cartella contenente tutti i pdf e cliccare il pulsante \"Invia le buste paga nella cartella\"");
         panel.add(labelIstruzioni);
 
-        labelIstruzioni1.setFont(new Font("Dialog", 1, 14)); // NOI18N
         labelIstruzioni1.setHorizontalAlignment(SwingConstants.CENTER);
+        labelIstruzioni1.setFont(new Font("Leelawadee UI", 1, 18));
         labelIstruzioni1.setText("e in automatico verranno inviate tramite mail, in caso di errori verranno mostrati nel riquadro in basso");
         panel.add(labelIstruzioni1);
         
+        labelIstruzioni2.setHorizontalAlignment(SwingConstants.CENTER);
+        labelIstruzioni2.setFont(new Font("Leelawadee UI", 1, 18));
+        labelIstruzioni2.setText("Il pulsante \"Salva log\" è utile in caso di errori, in modo che gli sviluppatori possano risolvere.");
+        panel.add(labelIstruzioni2);
+        
+        
+        // successo
+        labelSuccess.setHorizontalAlignment(SwingConstants.CENTER);
+        labelSuccess.setFont(new Font("Leelawadee UI", 1, 18));
+        labelSuccess.setText("Buste Paga inviate correttamente!");
+        labelSuccess.setForeground(new Color(0,255,0));
+        labelSuccess.setVisible(false);
+        panel.add(labelSuccess);
         
         // layout
         GroupLayout layout = new GroupLayout(panel);
@@ -123,6 +140,8 @@ public class GUI extends JFrame implements ActionListener {
                     .addComponent(pannelloScroll, GroupLayout.Alignment.TRAILING)
                     .addComponent(labelTitolo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelIstruzioni1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelIstruzioni2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelSuccess, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
                             .addComponent(saveLog))
@@ -139,7 +158,9 @@ public class GUI extends JFrame implements ActionListener {
                 .addComponent(labelIstruzioni, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelIstruzioni1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelIstruzioni2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelSuccess, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                //.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(separatore, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button)
@@ -151,14 +172,15 @@ public class GUI extends JFrame implements ActionListener {
         panel.setLayout(layout);
         
         // set icona
-        ImageIcon img = new ImageIcon(".\\logo.png"); 
+        ImageIcon img = new ImageIcon(".\\\\logo.png"); 
         frame.setIconImage(img.getImage());
-        
+           
         
         // set up the frame and display it
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Buste Paga");
+        frame.setMinimumSize(new Dimension(1250,730));
         frame.pack();
         frame.setVisible(true);
         
@@ -196,6 +218,7 @@ public class GUI extends JFrame implements ActionListener {
 	    
 	    
 	    logTextArea.append("\n\n ============ [FINE] ============\n");
+	    labelSuccess.setVisible(true);
     }
     
     
