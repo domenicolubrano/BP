@@ -45,18 +45,20 @@ public class GUI extends JFrame implements ActionListener {
     private static JLabel labelIstruzioni1 = new JLabel();
     private static JLabel labelIstruzioni2 = new JLabel();
     private static JLabel labelSuccess = new JLabel();
+    
+    public static boolean errore = false;
 
     public GUI() {
     	
     	
-    	
+    	// pannello
     	JPanel panel = new JPanel();
     	panel.setBackground(new Color(255, 255, 255));
         panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panel.setLayout(new GridLayout(0, 1));
 
     	
-    	
+    	// bottone invia BP
         JButton button = new JButton("Manda Buste Paga presenti nella cartella");
         //button.addActionListener(this);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -70,7 +72,7 @@ public class GUI extends JFrame implements ActionListener {
         });
         panel.add(button);
         
-        
+        // bottone salva log
         JButton saveLog = new JButton("Salva Log");
         saveLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
         saveLog.setBackground(new Color(22,158,255));
@@ -91,7 +93,6 @@ public class GUI extends JFrame implements ActionListener {
         logTextArea.setRows(5);
         pannelloScroll.setViewportView(logTextArea);
         panel.add(pannelloScroll);
-        //panel.add(logTextArea);
         
         
         // titolo
@@ -182,7 +183,7 @@ public class GUI extends JFrame implements ActionListener {
         frame.setIconImage(img.getImage());
            
         
-        // set up the frame and display it
+        // set up frame
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Buste Paga");
@@ -198,33 +199,37 @@ public class GUI extends JFrame implements ActionListener {
     
     // invia BP premuto
     private void bottoneActionPerformed(ActionEvent e) {                                          
-    	frame.setVisible(true);
     	logTextArea.append("\n\n ============ [INIZIO] ============\n\n");
 	        
-	    try {
-	    	
-	    	//get nomi da file
-	        List<String> files = FileUtils.getFileName(new File("."));  // ricerca file
-	        logTextArea.append("\n\n [INFO] -> Nessun altro file trovato\n\n");
+	  
+	    // get nomi da file
+	    List<String> files = FileUtils.getFileName(new File("."));  // ricerca file
+	    logTextArea.append("\n\n [INFO] -> Nessun altro file trovato\n\n");
 	        
-	        for (String file : files) {	
-	        	String oggetto = FileUtils.getOggettoMail(file);
+	    for (String file : files) {	
+	        String oggetto = FileUtils.getOggettoMail(file);
+	        String nominativo = FileUtils.getNominativo(file);
 	        	
-	        	SendMail.send("test", oggetto);
-			}
-	
-	        
-				
-	    } catch (AddressException e1) {	
-			e1.printStackTrace();
-		} catch (MessagingException e1) {
-			e1.printStackTrace();
-		}
-    	
+	        SendMail.send("test", oggetto);
+	    }
 	    
 	    
+
 	    logTextArea.append("\n\n ============ [FINE] ============\n");
-	    labelSuccess.setVisible(true);
+	    
+	    
+	    // controllo errori
+	    if(errore == false) {
+	    	labelSuccess.setText("Buste Paga inviate correttamente!");
+	        labelSuccess.setForeground(new Color(0,255,0));
+	    	labelSuccess.setVisible(true);
+	    }else {
+	    	labelSuccess.setText("Si sono verificati degli errori, controlla il log");
+	    	labelSuccess.setForeground(new Color(255,0,0));
+	    	labelSuccess.setVisible(true);
+	    }
+	    errore = false;
+	    
     }
     
     
@@ -246,6 +251,7 @@ public class GUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
 			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
 			e1.printStackTrace();
+			errore = true;
 		}
 		
     }

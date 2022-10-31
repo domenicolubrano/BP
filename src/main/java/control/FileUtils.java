@@ -24,7 +24,7 @@ public class FileUtils {
 	        	//getFileName(fileEntry); //prende i file nelle sottocartelle
 	        } else {
 	        	if(fileEntry.getName().contains(".exe") || fileEntry.getName().contains(".jar")) {
-	        		
+	        		// non fare nulla
 	        	}else {
 	        		System.out.println(fileEntry.getName());
 	        		GUI.logTextArea.append(" [INFO] -> File Trovato: " + fileEntry.getName() + "\n");
@@ -66,8 +66,16 @@ public class FileUtils {
 		return nome[2];
 	}
 	
-	
-
+	/**
+	 * 
+	 * @param nome
+	 * @return email dell nome
+	 */
+	public static String getEmail(String nome) {
+		Map<String, String> data = new HashMap<String, String>();
+		
+		return data.get(nome);
+	}
 
 
 }

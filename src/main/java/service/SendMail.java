@@ -20,7 +20,7 @@ public class SendMail {
 	private static String email = "d.lubranolobianco@3em.it";
 	private static String password = "DmcLbLb@12";
 
-	public static void send(String destinatario, String oggetto) throws AddressException, MessagingException {
+	public static void send(String destinatario, String oggetto){
 	Properties prop = new Properties();
 	
 	prop.put("mail.smtp.auth", true);
@@ -38,66 +38,97 @@ public class SendMail {
 	
 	
 	Message message = new MimeMessage(session);
+	
+	// chi invia la mail
 	try {
 		message.setFrom(new InternetAddress(email));
+		
 	} catch (AddressException e1) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
+		GUI.errore = true;
 	} catch (MessagingException e1) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
+		GUI.errore = true;
 	}
-	message.setRecipients(
-	  Message.RecipientType.TO, InternetAddress.parse(destinatario));
+	
+	// destinatario della mail
+	try {
+		message.setRecipients(
+		  Message.RecipientType.TO, InternetAddress.parse(destinatario));
+		
+	} catch (AddressException e1) {
+		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
+		e1.printStackTrace();
+		GUI.errore = true;
+	} catch (MessagingException e1) {
+		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
+		e1.printStackTrace();
+		GUI.errore = true;
+	}
+	
+	
+	// oggetto della mail
 	try {
 		message.setSubject(oggetto);
+		
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
+		GUI.errore = true;
 	}
 
+	
+	
+	// corpo della mail
 	String msg = "This is my first email using JavaMailer";
-
 	MimeBodyPart mimeBodyPart = new MimeBodyPart();
 	try {
 		mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+		
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
+		GUI.errore = true;
 	}
-
 	Multipart multipart = new MimeMultipart();
 	try {
 		multipart.addBodyPart(mimeBodyPart);
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
+		GUI.errore = true;
 	}
-
 	try {
 		message.setContent(multipart);
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
+		GUI.errore = true;
 	}
 
 	
 	
-	
+	// allegati della mial
 //	MimeBodyPart attachmentBodyPart = new MimeBodyPart();
 //	try {
-//		attachmentBodyPart.attachFile(new File("path/to/file"));
+//		attachmentBodyPart.attachFile(new File("./" + allegato));
 //		multipart.addBodyPart(attachmentBodyPart);
 //	} catch (IOException e) {
-//		// TODO Auto-generated catch block
+//		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 //		e.printStackTrace();
+//		GUI.errore = true;
 //	}
 	
+	
+	// invio messaggio
 	try {
 		Transport.send(message);
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
+		GUI.errore = true;
 	}
 	
 	
