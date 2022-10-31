@@ -2,7 +2,11 @@ package control;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.print.attribute.HashDocAttributeSet;
 
 import service.GUI;
 
@@ -17,9 +21,11 @@ public class FileUtils {
 		List<String> nomiFile = new ArrayList<String>();
 	    for (final File fileEntry : folder.listFiles()) {
 	        if (fileEntry.isDirectory()) {
-	        	getFileName(fileEntry);
+	        	//getFileName(fileEntry); //prende i file nelle sottocartelle
 	        } else {
-	        	if(!fileEntry.getName().contains(".exe") || !fileEntry.getName().contains(".jar")) {
+	        	if(fileEntry.getName().contains(".exe") || fileEntry.getName().contains(".jar")) {
+	        		
+	        	}else {
 	        		System.out.println(fileEntry.getName());
 	        		GUI.logTextArea.append(" [INFO] -> File Trovato: " + fileEntry.getName() + "\n");
 		            nomiFile.add(fileEntry.getName());
@@ -60,6 +66,8 @@ public class FileUtils {
 		return nome[2];
 	}
 	
+	
+
 
 
 }

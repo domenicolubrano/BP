@@ -172,7 +172,13 @@ public class GUI extends JFrame implements ActionListener {
         panel.setLayout(layout);
         
         // set icona
-        ImageIcon img = new ImageIcon(".\\\\logo.png"); 
+        ImageIcon img = new ImageIcon();
+        try {
+        	img = new ImageIcon(getClass().getResource("/resources/logo.png")); 
+            
+        }catch(NullPointerException e) {
+        	img = new ImageIcon(".\\src\\main\\resources\\logo.png"); 
+        }
         frame.setIconImage(img.getImage());
            
         
@@ -240,7 +246,8 @@ public class GUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
 			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
 			e1.printStackTrace();
-		}    	
+		}
+		
     }
 
     

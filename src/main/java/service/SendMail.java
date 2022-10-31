@@ -101,7 +101,7 @@ public class SendMail {
 	}
 	
 	
-	String msgStyled = "This is my <b style='color:red;'>bold-red email</b> using JavaMailer";
+	//String msgStyled = "This is my <b style='color:red;'>bold-red email</b> using JavaMailer";
 
 	
 }
