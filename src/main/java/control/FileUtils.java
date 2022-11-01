@@ -48,7 +48,7 @@ public class FileUtils {
 		try {
 			return "BP " + ogg[1];
 		}catch(Exception e) {
-			return "BP";
+			return "Busta Paga";
 		}
 		
 	}
@@ -61,9 +61,13 @@ public class FileUtils {
 	*/
 	public static String getNominativo(String file){		
 		String[] nome = file.split("-");
+		try {
+			return nome[2];
+		}catch(Exception e) {
+			return "NULL";
+		}
 	
-	
-		return nome[2];
+		
 	}
 	
 	/**

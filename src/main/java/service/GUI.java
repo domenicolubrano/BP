@@ -64,6 +64,7 @@ public class GUI extends JFrame implements ActionListener {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setBackground(new Color(22,158,255));
         button.setForeground(new Color(255,255,255));
+        button.setFont(new Font("Arial", 1, 18));
         button.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -77,6 +78,7 @@ public class GUI extends JFrame implements ActionListener {
         saveLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
         saveLog.setBackground(new Color(22,158,255));
         saveLog.setForeground(new Color(255,255,255));
+        saveLog.setFont(new Font("Arial", 1, 18));
         saveLog.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         saveLog.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -98,24 +100,24 @@ public class GUI extends JFrame implements ActionListener {
         // titolo
         labelTitolo.setHorizontalAlignment(SwingConstants.CENTER);
         labelTitolo.setText("Invia Buste Paga");
-        labelTitolo.setFont(new Font("Leelawadee UI", 1, 24));
+        labelTitolo.setFont(new Font("Leelawadee UI", 1, 25));
         labelTitolo.setForeground(new Color(22,158,255));
         panel.add(labelTitolo);
         
         
         // istruzioni
         labelIstruzioni.setHorizontalAlignment(SwingConstants.CENTER);
-        labelIstruzioni.setFont(new Font("Leelawadee UI", 1, 18));
+        labelIstruzioni.setFont(new Font("Leelawadee UI", 1, 20));
         labelIstruzioni.setText("Inserire il file nella cartella contenente tutti i pdf e cliccare il pulsante \"Invia le buste paga nella cartella\"");
         panel.add(labelIstruzioni);
 
         labelIstruzioni1.setHorizontalAlignment(SwingConstants.CENTER);
-        labelIstruzioni1.setFont(new Font("Leelawadee UI", 1, 18));
-        labelIstruzioni1.setText("e in automatico verranno inviate tramite mail, in caso di errori verranno mostrati nel riquadro in basso");
+        labelIstruzioni1.setFont(new Font("Leelawadee UI", 1, 20));
+        labelIstruzioni1.setText("In automatico verranno inviate tramite mail, in caso di errori verranno mostrati nel riquadro in basso");
         panel.add(labelIstruzioni1);
         
         labelIstruzioni2.setHorizontalAlignment(SwingConstants.CENTER);
-        labelIstruzioni2.setFont(new Font("Leelawadee UI", 1, 18));
+        labelIstruzioni2.setFont(new Font("Leelawadee UI", 1, 20));
         labelIstruzioni2.setText("Il pulsante \"Salva log\" è utile in caso di errori, in modo che gli sviluppatori possano risolvere.");
         panel.add(labelIstruzioni2);
         
@@ -204,7 +206,7 @@ public class GUI extends JFrame implements ActionListener {
 	  
 	    // get nomi da file
 	    List<String> files = FileUtils.getFileName(new File("."));  // ricerca file
-	    logTextArea.append("\n\n [INFO] -> Nessun altro file trovato\n\n");
+	    logTextArea.append("\n [INFO] -> Nessun altro file trovato\n\n");
 	        
 	    for (String file : files) {	
 	        String oggetto = FileUtils.getOggettoMail(file);
