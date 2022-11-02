@@ -109,10 +109,10 @@ public class SendMail {
 			"Via Antiniana, 2/G\r\n" + 
 			"80078 Pozzuoli� (NA)\r\n" + 
 			"ITALY\r\n" + 
-			"Phone:�� 	 +39 081 5234193\r\n" + 
-			"Fax:��������+39 081 8531552\r\n" + 
-			"Mail:� � � �info@3em.it\r\n" + 
-			"Site:�������www.3em.it\r\n" + 
+			"Phone:   	 +39 081 5234193\r\n" + 
+			"Fax:        +39 081 8531552\r\n" + 
+			"Mail:       info@3em.it\r\n" + 
+			"Site:       www.3em.it\r\n" + 
 			"\r\n" + 
 			"GDPR� 2016/679\r\n" + 
 			"\r\n" + 
