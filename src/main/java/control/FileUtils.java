@@ -60,17 +60,7 @@ public class FileUtils {
 	}
 
 
-         /**
-	 * 
-	 * @param nome file
-	 * @return nominativo
-	 */
-	public static String getNominativo(String file){		
-		String[] nome = file.split("-");
-		
-	
-		return nome[2];
-	}
+
 	
 	
     /**
