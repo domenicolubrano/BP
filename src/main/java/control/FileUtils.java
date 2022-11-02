@@ -42,7 +42,7 @@ public class FileUtils {
 
          /**
 	 * 
-	 * @param nome file
+	 * @param nome files
 	 * @return nominativo
 	 */
 	public static String getNominativo(String file){		
