@@ -21,6 +21,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,6 +45,9 @@ public class GUI extends JFrame implements ActionListener {
     private static JLabel labelIstruzioni1 = new JLabel();
     private static JLabel labelIstruzioni2 = new JLabel();
     private static JLabel labelSuccess = new JLabel();
+    private static JMenuItem accountSettings = new JMenuItem();
+    private static JMenuBar jMenuBar1 = new JMenuBar();
+    private static JMenu settingMenu = new JMenu();
     private static JButton button = new JButton("Manda Buste Paga presenti nella cartella");
     
     public static boolean errore = false;
@@ -181,7 +187,29 @@ public class GUI extends JFrame implements ActionListener {
         	img = new ImageIcon(".\\src\\main\\resources\\logo.png"); 
         }
         frame.setIconImage(img.getImage());
-           
+        
+        
+        
+        // menu bar
+        settingMenu.setText("Impostazioni");
+        settingMenu.setFont(new Font("Arial", 1, 15));
+        settingMenu.setBackground(new Color(22,158,255));
+        settingMenu.setForeground(new Color(255,255,255));
+
+        accountSettings.setText("Account");
+        accountSettings.setFont(new Font("Arial", 1, 15));
+        accountSettings.setBackground(new Color(22,158,255));
+        accountSettings.setForeground(new Color(255,255,255));
+        accountSettings.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                accountSettingLogActionPerformed(evt);
+            }
+        });
+        settingMenu.add(accountSettings);
+
+        jMenuBar1.add(settingMenu);
+        jMenuBar1.setBackground(new Color(22,158,255));
+        frame.setJMenuBar(jMenuBar1);
         
         // set up frame
         frame.add(panel, BorderLayout.CENTER);
@@ -197,7 +225,9 @@ public class GUI extends JFrame implements ActionListener {
     }
     
     
-    // invia BP premuto
+
+
+	// invia BP premuto
     private void bottoneActionPerformed(ActionEvent e) {                                          
     	logTextArea.append("\n\n ============ [INIZIO] ============\n\n");
 	    
@@ -249,7 +279,7 @@ public class GUI extends JFrame implements ActionListener {
     
     
     // salva log premuto
-    public void saveLogActionPerformed(ActionEvent e) {
+    private void saveLogActionPerformed(ActionEvent e) {
     	String log = logTextArea.getText();
     	
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH.mm.ss");  
@@ -270,8 +300,12 @@ public class GUI extends JFrame implements ActionListener {
 	
     }
 
-    
-    
+    // impostazioni account premuto
+    private void accountSettingLogActionPerformed(ActionEvent evt) {
+		new ImpostazioniGUI();
+		
+	}
+
     
     // azione generale effettuata
 	public void actionPerformed(ActionEvent e) {

@@ -188,6 +188,10 @@ public class SendMail {
 		SendMail.password = password;
 	}
 	
+	public static String getEmail() {
+		return email;
+	}
+	
 	
 	public static void setCredenziali() {
 		Properties p = new Properties();

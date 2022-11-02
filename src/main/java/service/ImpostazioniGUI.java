@@ -38,6 +38,10 @@ public class ImpostazioniGUI  extends JFrame implements ActionListener {
 	
 	public ImpostazioniGUI() {
 		
+		
+		// carica email
+		email.setText(SendMail.getEmail());
+				
 		// pannello
     	JPanel panel = new JPanel();
     	panel.setBackground(new Color(255, 255, 255));
@@ -135,9 +139,11 @@ public class ImpostazioniGUI  extends JFrame implements ActionListener {
         frame.setTitle("Buste Paga - Impostazioni");
         frame.pack();
         frame.setVisible(true);
+        
+        
 	}
 	
-
+	
 	
 	// bottone salva premuto
 	protected void salvaActionPerformed(ActionEvent evt) {
