@@ -82,7 +82,45 @@ public class SendMail {
 	
 	
 	// corpo della mail
-	String msg = "This is my first email using JavaMailer";
+	String msg = "Buongiorno,\r\n" + 
+			"\r\n" + 
+			"invio in allegato buste paga  come in oggetto.\r\n" + 
+			"\r\n" + 
+			"Ti prego di provvedere alla compilazione del solito Form per le attestazioni di spese non documentate per l’importo che trovi sotto la voce “Rimborso spese piè di lista” in busta paga.\r\n" + 
+			"\r\n" + 
+			"Attendo entrambi i documenti firmati con ogni cortese URGENZA. Qualora non avessi già provveduto all’invio degli stessi documenti per I MESI PRECEDENTI, ti ricordo ti inviare tutto CON URGENZA.\r\n" + 
+			"\r\n" + 
+			"Grazie per la collaborazione e saluti"+
+			"\r\n" + 
+			"\r\n" + 
+			"\r\n" + 
+			"\r\n" + 
+			"Francesca scarmozzino\r\n" + 
+			"<sub style='color:grey;'>"+
+			"\r\n" + 
+			"Software Developer\r\n" + 
+			"\r\n" + 
+			"Via Antiniana, 2/G\r\n" + 
+			"80078 Pozzuoli  (NA)\r\n" + 
+			"ITALY\r\n" + 
+			"Phone:   +39 081 5234193\r\n" + 
+			"Fax:        +39 081 8531552\r\n" + 
+			"Mail:       info@3em.it\r\n" + 
+			"Site:        www.3em.it\r\n" + 
+			"\r\n" + 
+			"GDPR  2016/679\r\n" + 
+			"\r\n" + 
+			"Il presente messaggio e gli eventuali suoi allegati sono di natura aziendale, prevalentemente confidenziale e sono visionabili solo dal destinatario di posta elettronica. La risposta o l’eventuale invio spontaneo da parte vostra di e-mail al nostro indirizzo potrebbero non assicurare la confidenzialità potendo essere viste da altri soggetti appartenenti all’Azienda oltre che al firmatario della presente, per finalità di sicurezza informatica, amministrative e allo scopo del continuo svolgimento dell’attività aziendale. Qualora questo messaggio vi fosse pervenuto per errore, vi preghiamo di cancellarlo dal vostro sistema e vi chiediamo di volercene dare cortesemente comunicazione al mittente.\r\n" + 
+			"\r\n" + 
+			"La Vs. mail è in ns. possesso in quanto da Voi fornitaci tramite comunicazione scritta, telefonica, telematica o direttamente oralmente. Essa è utilizzata esclusivamente per fornirVi informazioni sulla ns. attività e sui servizi da noi offerti. Non sarà ceduta a terzi in nessun caso salvo approvazione da parte Vostra. Il Titolare del trattamento  è  TRE EMME ENGINEERING S.R.L.  I ns. sistemi informativi e le ns. procedure interne sono conformi alle norme e garantiamo la presenza di adeguate misure tecniche ed organizzative costantemente aggiornate.\r\n" + 
+			"\r\n" + 
+			"E’ possibile in qualsiasi momento richiedere la cancellazione della Vs. mail tramite il semplice invio di una mail a info@3em.it"
+			+"</sub>";
+
+	
+	
+	
+	
 	MimeBodyPart mimeBodyPart = new MimeBodyPart();
 	try {
 		mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
