@@ -1,6 +1,5 @@
 package control;
 
-
 import service.GUI;
 
 public class Main{
