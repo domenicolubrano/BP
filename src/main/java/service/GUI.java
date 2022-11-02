@@ -33,8 +33,6 @@ import control.FileUtils;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame implements ActionListener {
-//  private int clicks = 0;
-    //private static JLabel label = new JLabel();
     private static JFrame frame = new JFrame();
     private static JScrollPane pannelloScroll = new JScrollPane();
     public static JTextArea logTextArea = new JTextArea();
@@ -44,12 +42,14 @@ public class GUI extends JFrame implements ActionListener {
     private static JLabel labelIstruzioni1 = new JLabel();
     private static JLabel labelIstruzioni2 = new JLabel();
     private static JLabel labelSuccess = new JLabel();
-    private static  JButton button = new JButton("Manda Buste Paga presenti nella cartella");
+    private static JButton button = new JButton("Manda Buste Paga presenti nella cartella");
     
     public static boolean errore = false;
 
     public GUI() {
-    	
+
+    	//carica credenziali
+    	SendMail.setCredenziali();
     	
     	// pannello
     	JPanel panel = new JPanel();

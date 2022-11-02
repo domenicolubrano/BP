@@ -1,5 +1,8 @@
 package service;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -89,9 +92,9 @@ public class SendMail {
 			"\r\n" + 
 			"invio in allegato buste paga  come in oggetto.\r\n" + 
 			"\r\n" + 
-			"Ti prego di provvedere alla compilazione del solito Form per le attestazioni di spese non documentate per l’importo che trovi sotto la voce “Rimborso spese piè di lista” in busta paga.\r\n" + 
+			"Ti prego di provvedere alla compilazione del solito Form per le attestazioni di spese non documentate per lï¿½importo che trovi sotto la voce ï¿½Rimborso spese piï¿½ di listaï¿½ in busta paga.\r\n" + 
 			"\r\n" + 
-			"Attendo entrambi i documenti firmati con ogni cortese URGENZA. Qualora non avessi già provveduto all’invio degli stessi documenti per I MESI PRECEDENTI, ti ricordo ti inviare tutto CON URGENZA.\r\n" + 
+			"Attendo entrambi i documenti firmati con ogni cortese URGENZA. Qualora non avessi giï¿½ provveduto allï¿½invio degli stessi documenti per I MESI PRECEDENTI, ti ricordo ti inviare tutto CON URGENZA.\r\n" + 
 			"\r\n" + 
 			"Grazie per la collaborazione e saluti"+
 			"\r\n" + 
@@ -104,20 +107,20 @@ public class SendMail {
 			"Software Developer\r\n" + 
 			"\r\n" + 
 			"Via Antiniana, 2/G\r\n" + 
-			"80078 Pozzuoli  (NA)\r\n" + 
+			"80078 Pozzuoliï¿½ (NA)\r\n" + 
 			"ITALY\r\n" + 
-			"Phone:   	 +39 081 5234193\r\n" + 
-			"Fax:        +39 081 8531552\r\n" + 
-			"Mail:       info@3em.it\r\n" + 
-			"Site:       www.3em.it\r\n" + 
+			"Phone:ï¿½ï¿½ 	 +39 081 5234193\r\n" + 
+			"Fax:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+39 081 8531552\r\n" + 
+			"Mail:ï¿½ ï¿½ ï¿½ ï¿½info@3em.it\r\n" + 
+			"Site:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½www.3em.it\r\n" + 
 			"\r\n" + 
-			"GDPR  2016/679\r\n" + 
+			"GDPRï¿½ 2016/679\r\n" + 
 			"\r\n" + 
-			"Il presente messaggio e gli eventuali suoi allegati sono di natura aziendale, prevalentemente confidenziale e sono visionabili solo dal destinatario di posta elettronica. La risposta o l’eventuale invio spontaneo da parte vostra di e-mail al nostro indirizzo potrebbero non assicurare la confidenzialità potendo essere viste da altri soggetti appartenenti all’Azienda oltre che al firmatario della presente, per finalità di sicurezza informatica, amministrative e allo scopo del continuo svolgimento dell’attività aziendale. Qualora questo messaggio vi fosse pervenuto per errore, vi preghiamo di cancellarlo dal vostro sistema e vi chiediamo di volercene dare cortesemente comunicazione al mittente.\r\n" + 
+			"Il presente messaggio e gli eventuali suoi allegati sono di natura aziendale, prevalentemente confidenziale e sono visionabili solo dal destinatario di posta elettronica. La risposta o lï¿½eventuale invio spontaneo da parte vostra di e-mail al nostro indirizzo potrebbero non assicurare la confidenzialitï¿½ potendo essere viste da altri soggetti appartenenti allï¿½Azienda oltre che al firmatario della presente, per finalitï¿½ di sicurezza informatica, amministrative e allo scopo del continuo svolgimento dellï¿½attivitï¿½ aziendale. Qualora questo messaggio vi fosse pervenuto per errore, vi preghiamo di cancellarlo dal vostro sistema e vi chiediamo di volercene dare cortesemente comunicazione al mittente.\r\n" + 
 			"\r\n" + 
-			"La Vs. mail è in ns. possesso in quanto da Voi fornitaci tramite comunicazione scritta, telefonica, telematica o direttamente oralmente. Essa è utilizzata esclusivamente per fornirVi informazioni sulla ns. attività e sui servizi da noi offerti. Non sarà ceduta a terzi in nessun caso salvo approvazione da parte Vostra. Il Titolare del trattamento  è  TRE EMME ENGINEERING S.R.L.  I ns. sistemi informativi e le ns. procedure interne sono conformi alle norme e garantiamo la presenza di adeguate misure tecniche ed organizzative costantemente aggiornate.\r\n" + 
+			"La Vs. mail ï¿½ in ns. possesso in quanto da Voi fornitaci tramite comunicazione scritta, telefonica, telematica o direttamente oralmente. Essa ï¿½ utilizzata esclusivamente per fornirVi informazioni sulla ns. attivitï¿½ e sui servizi da noi offerti. Non sarï¿½ ceduta a terzi in nessun caso salvo approvazione da parte Vostra. Il Titolare del trattamentoï¿½ï¿½è  TRE EMME ENGINEERING S.R.L.ï¿½ï¿½I ns. sistemi informativi e le ns. procedure interne sono conformi alle norme e garantiamo la presenza di adeguate misure tecniche ed organizzative costantemente aggiornate.\r\n" + 
 			"\r\n" + 
-			"E’ possibile in qualsiasi momento richiedere la cancellazione della Vs. mail tramite il semplice invio di una mail a info@3em.it"
+			"Eï¿½ possibile in qualsiasi momento richiedere la cancellazione della Vs. mail tramite il semplice invio di una mail aï¿½info@3em.it"
 			+"</sub>";
 
 	
@@ -175,6 +178,29 @@ public class SendMail {
 
 	
 }
+	
+	
+	public static void setEmail(String email) {
+		SendMail.email = email;
+	}
+	
+	public static void setPassword(String password) {
+		SendMail.password = password;
+	}
+	
+	
+	public static void setCredenziali() {
+		Properties p = new Properties();
+		try {
+			p.load(new FileReader(System.getenv("APPDATA") + "/bp3em.properties"));
+			email = p.getProperty("email");
+			password = p.getProperty("password");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }
