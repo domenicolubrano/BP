@@ -169,8 +169,7 @@ public class SendMail {
 		GUI.errore = true;
 	}
 	
-	
-	//String msgStyled = "This is my <b style='color:red;'>bold-red email</b> using JavaMailer";
+
 
 	
 }

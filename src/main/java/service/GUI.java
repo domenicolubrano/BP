@@ -209,10 +209,12 @@ public class GUI extends JFrame implements ActionListener {
 	    logTextArea.append("\n [INFO] -> Nessun altro file trovato\n\n");
 	        
 	    for (String file : files) {	
+	    	
 	        String oggetto = FileUtils.getOggettoMail(file);
 	        String nominativo = FileUtils.getNominativo(file);
+	        String email = FileUtils.getEmail(nominativo);
 	        	
-	        SendMail.send("test", oggetto);
+	        SendMail.send(email, oggetto);
 	    }
 	    
 	    
@@ -238,27 +240,24 @@ public class GUI extends JFrame implements ActionListener {
     
     // salva log premuto
     public void saveLogActionPerformed(ActionEvent e) {
-//    	String log = logTextArea.getText();
-//    	
-//    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH.mm.ss");  
-//    	LocalDateTime oggi = LocalDateTime.now();  
-//
-//    	FileWriter logFile;
-//		try {
-//			logFile = new FileWriter("./log-" + formatter.format(oggi) + ".txt");
-//			logFile.write(log);
-//	    	logFile.close();
-//	    	JOptionPane.showMessageDialog(null, "Log Salvato");
-//		} catch (IOException e1) {
-//			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
-//			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
-//			e1.printStackTrace();
-//			errore = true;
-//		}
+    	String log = logTextArea.getText();
     	
-    	String t = FileUtils.getEmail("nome1");
-    	
-		
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH.mm.ss");  
+    	LocalDateTime oggi = LocalDateTime.now();  
+
+    	FileWriter logFile;
+		try {
+			logFile = new FileWriter("./log-" + formatter.format(oggi) + ".txt");
+			logFile.write(log);
+	    	logFile.close();
+	    	JOptionPane.showMessageDialog(null, "Log Salvato");
+		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
+			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
+			e1.printStackTrace();
+			errore = true;
+		}
+	
     }
 
     
