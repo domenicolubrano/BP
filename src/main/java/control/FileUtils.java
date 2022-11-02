@@ -70,7 +70,7 @@ public class FileUtils {
 		try {
 			
 			String nome = n[2].replace(".pdf", "");
-			nome = nome.replace(" ", "");
+			nome  = nome.trim();
 			
 			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: " + nome + "\n\n");
 			return nome;

@@ -166,14 +166,13 @@ public class SendMail {
 	// invio messaggio
 	try {
 		Transport.send(message);
+		GUI.logTextArea.append(" [INFO] ==> Email inviata correttamente\n\n");
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
 		GUI.errore = true;
 	}
-	
 
-	GUI.logTextArea.append(" [INFO] ==> Mail inviata\n\n");
 	
 }
 	

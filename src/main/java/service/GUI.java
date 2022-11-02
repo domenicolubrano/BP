@@ -220,8 +220,7 @@ public class GUI extends JFrame implements ActionListener {
 				// nulla
 			}
 	        
-	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...\n\n");
-	        logTextArea.append("\n [INFO] -> " + email + "\n" + oggetto + "\n" + nominativo + "\n");
+	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...\n");
 	        
 	        SendMail.send(email, oggetto);
 	    }
