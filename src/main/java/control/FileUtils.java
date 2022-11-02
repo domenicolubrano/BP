@@ -66,11 +66,18 @@ public class FileUtils {
 	* @return nominativo
 	*/
 	public static String getNominativo(String file){		
-		String[] nome = file.split("-");
+		String[] n = file.split("-");
 		try {
-			return nome[2];
+			
+			String nome = n[2].replace(".pdf", "");
+			nome = nome.replace(" ", "");
+			
+			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: " + nome + "\n\n");
+			return nome;
 		}catch(Exception e) {
+			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: NULL\n\n");
 			return "NULL";
+			
 		}
 	
 		
@@ -93,7 +100,7 @@ public class FileUtils {
 			String inputLine;
 			
 			while ((inputLine = in.readLine()) != null) {
-				 String[] arr = inputLine.split(";"); 
+				 String[] arr = inputLine.split(";");
 				 data.put(arr[0], arr[1]);
 			}
 			

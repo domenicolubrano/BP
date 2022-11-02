@@ -44,6 +44,7 @@ public class GUI extends JFrame implements ActionListener {
     private static JLabel labelIstruzioni1 = new JLabel();
     private static JLabel labelIstruzioni2 = new JLabel();
     private static JLabel labelSuccess = new JLabel();
+    private static  JButton button = new JButton("Manda Buste Paga presenti nella cartella");
     
     public static boolean errore = false;
 
@@ -58,8 +59,6 @@ public class GUI extends JFrame implements ActionListener {
 
     	
     	// bottone invia BP
-        JButton button = new JButton("Manda Buste Paga presenti nella cartella");
-        //button.addActionListener(this);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setBackground(new Color(22,158,255));
         button.setForeground(new Color(255,255,255));
@@ -201,7 +200,9 @@ public class GUI extends JFrame implements ActionListener {
     // invia BP premuto
     private void bottoneActionPerformed(ActionEvent e) {                                          
     	logTextArea.append("\n\n ============ [INIZIO] ============\n\n");
-	        
+	    
+    	button.setBorderPainted(false);
+    	button.setFocusPainted(false);
 	  
 	    // get nomi da file
 	    List<String> files = FileUtils.getFileName(new File("."));  // ricerca file
@@ -212,9 +213,17 @@ public class GUI extends JFrame implements ActionListener {
 	        String oggetto = FileUtils.getOggettoMail(file);
 	        String nominativo = FileUtils.getNominativo(file);
 	        String email = FileUtils.getEmail(nominativo);
-	        	
+	        
+	        try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				// nulla
+			}
+	        
+	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...\n\n");
+	        logTextArea.append("\n [INFO] -> " + email + "\n" + oggetto + "\n" + nominativo + "\n");
+	        
 	        SendMail.send(email, oggetto);
-	        logTextArea.append("\n [INFO] -> Invio email a " + email + "\n\n");
 	    }
 	    
 	    
@@ -234,6 +243,8 @@ public class GUI extends JFrame implements ActionListener {
 	    }
 	    errore = false;
 	    
+	    button.setBorderPainted(true);
+    	button.setFocusPainted(true);
     }
     
     

@@ -24,10 +24,13 @@ public class SendMail {
 	Properties prop = new Properties();
 	
 	prop.put("mail.smtp.auth", true);
-	prop.put("mail.smtp.starttls.enable", "true");
+	prop.put("mail.smtp.starttls.enable", "false");
 	prop.put("mail.smtp.host", "pop.3em.it");
 	prop.put("mail.smtp.port", "25");
-//	prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
+	prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+	prop.put("mail.smtp.ssl.trust", "authsmtp.3em.it");
+	prop.put("mail.smtp.ssl.trust", "authsmtp.securemail.pro");
+	
 	
 	Session session = Session.getInstance(prop, new Authenticator() {
 	    @Override
@@ -103,10 +106,10 @@ public class SendMail {
 			"Via Antiniana, 2/G\r\n" + 
 			"80078 Pozzuoli  (NA)\r\n" + 
 			"ITALY\r\n" + 
-			"Phone:   +39 081 5234193\r\n" + 
+			"Phone:   	 +39 081 5234193\r\n" + 
 			"Fax:        +39 081 8531552\r\n" + 
 			"Mail:       info@3em.it\r\n" + 
-			"Site:        www.3em.it\r\n" + 
+			"Site:       www.3em.it\r\n" + 
 			"\r\n" + 
 			"GDPR  2016/679\r\n" + 
 			"\r\n" + 
@@ -170,7 +173,7 @@ public class SendMail {
 	}
 	
 
-
+	GUI.logTextArea.append(" [INFO] ==> Mail inviata\n\n");
 	
 }
 	
