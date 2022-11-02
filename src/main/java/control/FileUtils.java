@@ -12,6 +12,9 @@ import service.GUI;
 
 public class FileUtils {
 	
+	private static String urlFile = "";
+	
+	
 	/**
 	 * 
 	 * @param Percorso cartella
