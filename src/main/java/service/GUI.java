@@ -1,4 +1,5 @@
 package service;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -14,8 +15,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -118,7 +117,7 @@ public class GUI extends JFrame implements ActionListener {
         
         labelIstruzioni2.setHorizontalAlignment(SwingConstants.CENTER);
         labelIstruzioni2.setFont(new Font("Leelawadee UI", 1, 20));
-        labelIstruzioni2.setText("Il pulsante \"Salva log\" è utile in caso di errori, in modo che gli sviluppatori possano risolvere.");
+        labelIstruzioni2.setText("Il pulsante \"Salva log\" e' utile in caso di errori, in modo che gli sviluppatori possano risolvere.");
         panel.add(labelIstruzioni2);
         
         
@@ -215,6 +214,7 @@ public class GUI extends JFrame implements ActionListener {
 	        String email = FileUtils.getEmail(nominativo);
 	        	
 	        SendMail.send(email, oggetto);
+	        logTextArea.append("\n [INFO] -> Invio email a " + email + "\n\n");
 	    }
 	    
 	    
@@ -252,7 +252,7 @@ public class GUI extends JFrame implements ActionListener {
 	    	logFile.close();
 	    	JOptionPane.showMessageDialog(null, "Log Salvato");
 		} catch (IOException e1) {
-			JOptionPane.showMessageDialog(null, "Non è stato possibile salvare il log...");
+			JOptionPane.showMessageDialog(null, "Non e' stato possibile salvare il log...");
 			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
 			e1.printStackTrace();
 			errore = true;
