@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +73,10 @@ public class FileUtils {
 			String nome = n[2].replace(".pdf", "");
 			nome  = nome.trim();
 			
+			nome = Normalizer.normalize(nome, Normalizer.Form.NFD);
+			nome = nome.replaceAll("[^\\p{ASCII}]", "");
+			nome = nome.replaceAll("\\p{M}", "");
+			
 			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: " + nome + "\n\n");
 			return nome;
 		}catch(Exception e) {
@@ -119,5 +124,37 @@ public class FileUtils {
 		return data.get(nome);
 	}
 
-
+	
+	
+	
+	public static Map<String, String> getAllEmail() {
+		URL url  = null;
+		BufferedReader in = null;
+		Map<String, String> data = new HashMap<String, String>();
+		
+		
+		try {
+			url = new URL(urlFile);
+			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String inputLine;
+			
+			while ((inputLine = in.readLine()) != null) {
+				 String[] arr = inputLine.split(";");
+				 data.put(arr[0], arr[1]);
+			}
+			
+			in.close();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return data;
+	}
+	
+	
+	
+	
 }

@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -167,7 +170,6 @@ public class GUI extends JFrame implements ActionListener {
                 .addComponent(labelIstruzioni1, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                 .addComponent(labelIstruzioni2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                 .addComponent(labelSuccess, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                //.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(separatore, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button)
@@ -244,15 +246,19 @@ public class GUI extends JFrame implements ActionListener {
 	        String nominativo = FileUtils.getNominativo(file);
 	        String email = FileUtils.getEmail(nominativo);
 	        
-	        try {
-				Thread.sleep(500);
-			} catch (InterruptedException e1) {
-				// nulla
-			}
+	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...");
+
+	        SendMail.send(email, oggetto, file);
+	        if(errore == false) {
+	        	try {
+					Files.move(Paths.get(file), Paths.get("Inviate/" + file), StandardCopyOption.REPLACE_EXISTING);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+					logTextArea.append("\n [INFO] -> Non è stato possibile spostare il file inviato(" + file + ")");
+				}
+	        }
 	        
-	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...\n");
 	        
-	        SendMail.send(email, oggetto);
 	    }
 	    
 	    
