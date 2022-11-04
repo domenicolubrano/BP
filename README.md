@@ -2,7 +2,7 @@
 
 - Alert per errori
 ```java
-JOptionPane.showMessageDialog(null, "Messaggio");
+showMessageDialog(null, "Messaggio");
 ```
 
 - Logo
