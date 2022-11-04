@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.text.WordUtils;
+
 import service.GUI;
 
 public class FileUtils {
@@ -72,6 +74,7 @@ public class FileUtils {
 			
 			String nome = n[2].replace(".pdf", "");
 			nome  = nome.trim();
+			nome = WordUtils.capitalizeFully(nome);
 			
 			nome = Normalizer.normalize(nome, Normalizer.Form.NFD);
 			nome = nome.replaceAll("[^\\p{ASCII}]", "");

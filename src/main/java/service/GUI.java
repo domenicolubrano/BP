@@ -175,7 +175,7 @@ public class GUI extends JFrame implements ActionListener {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button)
                 .addGap(24, 24, 24)
-                .addComponent(pannelloScroll, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                .addComponent(pannelloScroll, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                 .addComponent(saveLog)
                 .addContainerGap())
         );

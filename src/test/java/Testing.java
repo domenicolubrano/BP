@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,7 +17,7 @@ public class Testing {
 		for (Entry<String, String> entry : data.entrySet()) {
 		    String list = entry.getKey();
 		    
-		    File myObj = new File(percorso+"1- "+oggetto+" - "+list+".pdf");
+		    File myObj = new File(percorso + "1- " + oggetto + " - " + list + ".pdf");
 		    
 		    try {
 				if (myObj.createNewFile()) {
@@ -27,9 +26,10 @@ public class Testing {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		
+		    
+		  
 		
 	}
 
+}
 }
