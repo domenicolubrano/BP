@@ -280,6 +280,10 @@ public class GUI extends JFrame implements ActionListener {
 	    	labelSuccess.setText("Si sono verificati degli errori, controlla il log");
 	    	labelSuccess.setForeground(new Color(255,0,0));
 	    	labelSuccess.setVisible(true);
+			JOptionPane.showMessageDialog(null, "Sono presenti degli errori, clicca su \"Salva Log\" e contatta Domenico Lubrano\n\n"
+					+ "Email di riferimento: d.lubranolobianco@3em.it",
+				      "Errore!", JOptionPane.ERROR_MESSAGE);
+
 	    }
 	    errore = false;
 	    
