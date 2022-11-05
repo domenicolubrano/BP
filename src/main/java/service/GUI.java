@@ -3,6 +3,7 @@ package service;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -11,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -49,9 +52,11 @@ public class GUI extends JFrame implements ActionListener {
     private static JLabel labelIstruzioni2 = new JLabel();
     private static JLabel labelSuccess = new JLabel();
     private static JMenuItem accountSettings = new JMenuItem();
+    private static JMenuItem scaricaGuida = new JMenuItem();
     private static JMenuBar jMenuBar1 = new JMenuBar();
     private static JMenu settingMenu = new JMenu();
-    private static JButton button = new JButton("Manda Buste Paga presenti nella cartella");
+    private static JMenu helpMenu = new JMenu();
+    private static JButton button = new JButton("Invia Buste Paga presenti nella cartella");
     
     public static boolean errore = false;
 
@@ -109,6 +114,7 @@ public class GUI extends JFrame implements ActionListener {
         labelTitolo.setText("Invia Buste Paga");
         labelTitolo.setFont(new Font("Leelawadee UI", 1, 25));
         labelTitolo.setForeground(new Color(22,158,255));
+
         panel.add(labelTitolo);
         
         
@@ -174,7 +180,7 @@ public class GUI extends JFrame implements ActionListener {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button)
                 .addGap(24, 24, 24)
-                .addComponent(pannelloScroll, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                .addComponent(pannelloScroll, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
                 .addComponent(saveLog)
                 .addContainerGap())
         );
@@ -208,8 +214,28 @@ public class GUI extends JFrame implements ActionListener {
             }
         });
         settingMenu.add(accountSettings);
-
+        
+        helpMenu.setText("Guida");
+        helpMenu.setFont(new Font("Arial", 1, 15));
+        helpMenu.setBackground(new Color(22,158,255));
+        helpMenu.setForeground(new Color(255,255,255));
+        
+        
+        scaricaGuida.setText("Scarica Guida");
+        scaricaGuida.setFont(new Font("Arial", 1, 15));
+        scaricaGuida.setBackground(new Color(22,158,255));
+        scaricaGuida.setForeground(new Color(255,255,255));
+        scaricaGuida.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                scaricaGuidaActionPerformed(evt);
+            }
+        });
+        helpMenu.add(scaricaGuida);
+        
+       
         jMenuBar1.add(settingMenu);
+        jMenuBar1.add(helpMenu);
+
         jMenuBar1.setBackground(new Color(22,158,255));
         frame.setJMenuBar(jMenuBar1);
         
@@ -228,13 +254,14 @@ public class GUI extends JFrame implements ActionListener {
     
     
 
-
 	// invia BP premuto
     private void bottoneActionPerformed(ActionEvent e) {                                          
     	logTextArea.append("\n\n ============ [INIZIO] ============\n\n");
 	    
     	button.setBorderPainted(false);
     	button.setFocusPainted(false);
+    	
+    	
 	  
 	    // get nomi da file
 	    List<String> files = FileUtils.getFileName(new File("."));  // ricerca file
@@ -254,9 +281,11 @@ public class GUI extends JFrame implements ActionListener {
 					Files.move(Paths.get(file), Paths.get("Inviate/" + file), StandardCopyOption.REPLACE_EXISTING);
 				} catch (IOException e1) {
 					e1.printStackTrace();
-					logTextArea.append("\n [INFO] -> Non è stato possibile spostare il file inviato(" + file + ")");
+					logTextArea.append("\n [INFO] -> Non e stato possibile spostare il file inviato(" + file + ")");
 				}
 	        }
+	        
+	       
 	        
 	        
 	    }
@@ -275,6 +304,10 @@ public class GUI extends JFrame implements ActionListener {
 	    	labelSuccess.setText("Si sono verificati degli errori, controlla il log");
 	    	labelSuccess.setForeground(new Color(255,0,0));
 	    	labelSuccess.setVisible(true);
+			JOptionPane.showMessageDialog(null, "Sono presenti degli errori, clicca su \"Salva Log\" e contatta Domenico Lubrano\n\n"
+					+ "Email di riferimento: d.lubranolobianco@3em.it",
+				      "Errore!", JOptionPane.ERROR_MESSAGE);
+
 	    }
 	    errore = false;
 	    
@@ -288,6 +321,7 @@ public class GUI extends JFrame implements ActionListener {
     private void saveLogActionPerformed(ActionEvent e) {
     	String log = logTextArea.getText();
     	
+
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH.mm.ss");  
     	LocalDateTime oggi = LocalDateTime.now();  
 
@@ -311,6 +345,27 @@ public class GUI extends JFrame implements ActionListener {
 		new ImpostazioniGUI();
 		
 	}
+
+    
+    
+    // scarica guida premuto
+    protected void scaricaGuidaActionPerformed(ActionEvent evt) {
+		URI uri;
+		try {
+			uri = new URI(FileUtils.urlGuida);
+			Desktop dt = Desktop.getDesktop();
+        	dt.browse(uri);
+			JOptionPane.showMessageDialog(null, "La guida è stata scaricata, controlla i download");
+
+		} catch (URISyntaxException e) {
+			JOptionPane.showMessageDialog(null, "Non e' stato possibile aprire la guida...");
+			e.printStackTrace();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Non e' stato possibile aprire la guida...");
+			e.printStackTrace();
+		}		
+	}
+
 
     
     // azione generale effettuata

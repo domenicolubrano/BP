@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.apache.commons.text.WordUtils;
 import service.GUI;
 
 public class FileUtils {
 	
-	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/test/src/main/resources/mail.csv";
-	
+
+	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/main/src/main/resources/mail.csv"; // file con tutte le email
+	public static String urlGuida = "https://github.com/domenicolubrano/BP/files/9937694/Guida.Buste.Paga.Sender.pdf"; // url alla guida
+
 	
 	/**
 	 * 
@@ -30,14 +32,11 @@ public class FileUtils {
 	        if (fileEntry.isDirectory()) {
 	        	//getFileName(fileEntry); //prende i file nelle sottocartelle
 	        } else {
-	        	if(fileEntry.getName().contains(".exe") || fileEntry.getName().contains(".jar")) {
-	        		// non fare nulla
-	        	}else {
+	        	if(fileEntry.getName().contains(".pdf")) {
 	        		System.out.println(fileEntry.getName());
 	        		GUI.logTextArea.append(" [INFO] -> File Trovato: " + fileEntry.getName() + "\n");
 		            nomiFile.add(fileEntry.getName());
 	        	}
-	            
 	        }
 	    }
 	    
@@ -72,7 +71,8 @@ public class FileUtils {
 			
 			String nome = n[2].replace(".pdf", "");
 			nome  = nome.trim();
-			
+			nome = WordUtils.capitalizeFully(nome);
+
 			nome = Normalizer.normalize(nome, Normalizer.Form.NFD);
 			nome = nome.replaceAll("[^\\p{ASCII}]", "");
 			nome = nome.replaceAll("\\p{M}", "");
