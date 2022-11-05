@@ -18,7 +18,7 @@ import service.GUI;
 
 public class FileUtils {
 	
-	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/test/src/main/resources/mail.csv";
+	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/main/src/main/resources/mail.csv";
 	
 	
 	/**
@@ -32,14 +32,11 @@ public class FileUtils {
 	        if (fileEntry.isDirectory()) {
 	        	//getFileName(fileEntry); //prende i file nelle sottocartelle
 	        } else {
-	        	if(fileEntry.getName().contains(".exe") || fileEntry.getName().contains(".jar")) {
-	        		// non fare nulla
-	        	}else {
+	        	if(fileEntry.getName().contains(".pdf")) {
 	        		System.out.println(fileEntry.getName());
 	        		GUI.logTextArea.append(" [INFO] -> File Trovato: " + fileEntry.getName() + "\n");
 		            nomiFile.add(fileEntry.getName());
 	        	}
-	            
 	        }
 	    }
 	    
