@@ -53,7 +53,7 @@ public class FileUtils {
 		String[] ogg = file.split("-");
 		
 		try {
-			return "BP " + ogg[1];
+			return "Busta Paga: " + ogg[1];
 		}catch(Exception e) {
 			return "Busta Paga";
 		}
