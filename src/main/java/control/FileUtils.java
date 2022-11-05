@@ -18,8 +18,8 @@ import service.GUI;
 
 public class FileUtils {
 	
-	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/main/src/main/resources/mail.csv";
-	
+	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/main/src/main/resources/mail.csv"; // file con tutte le email
+	public static String urlGuida = "https://github.com/domenicolubrano/BP/files/9937694/Guida.Buste.Paga.Sender.pdf"; // url alla guida
 	
 	/**
 	 * 
