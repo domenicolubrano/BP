@@ -10,6 +10,7 @@ public class Main{
 
 	public static void main(String[] args) {
 		
+		// crea una cartella dove verranno spostate tutte le BP
 		try {
 			Files.createDirectories(Paths.get("./Inviate/"));
 		} catch (IOException e) {

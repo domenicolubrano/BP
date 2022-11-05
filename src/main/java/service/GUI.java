@@ -53,7 +53,7 @@ public class GUI extends JFrame implements ActionListener {
     private static JLabel labelSuccess = new JLabel();
     private static JMenuItem accountSettings = new JMenuItem();
     private static JMenuItem scaricaGuida = new JMenuItem();
-    private static JMenuBar jMenuBar1 = new JMenuBar();
+    private static JMenuBar jMenuBar = new JMenuBar();
     private static JMenu settingMenu = new JMenu();
     private static JMenu helpMenu = new JMenu();
     private static JButton button = new JButton("Invia Buste Paga presenti nella cartella");
@@ -233,11 +233,11 @@ public class GUI extends JFrame implements ActionListener {
         helpMenu.add(scaricaGuida);
         
        
-        jMenuBar1.add(settingMenu);
-        jMenuBar1.add(helpMenu);
+        jMenuBar.add(settingMenu);
+        jMenuBar.add(helpMenu);
 
-        jMenuBar1.setBackground(new Color(22,158,255));
-        frame.setJMenuBar(jMenuBar1);
+        jMenuBar.setBackground(new Color(22,158,255));
+        frame.setJMenuBar(jMenuBar);
         
         // set up frame
         frame.add(panel, BorderLayout.CENTER);
@@ -281,7 +281,7 @@ public class GUI extends JFrame implements ActionListener {
 					Files.move(Paths.get(file), Paths.get("Inviate/" + file), StandardCopyOption.REPLACE_EXISTING);
 				} catch (IOException e1) {
 					e1.printStackTrace();
-					logTextArea.append("\n [INFO] -> Non e stato possibile spostare il file inviato(" + file + ")");
+					logTextArea.append("\n [INFO] -> Non e stato possibile spostare il file inviato(" + file + ")\n [ERRORE] -> " + e1.getMessage());
 				}
 	        }
 	        
@@ -326,17 +326,24 @@ public class GUI extends JFrame implements ActionListener {
     	LocalDateTime oggi = LocalDateTime.now();  
 
     	FileWriter logFile;
-		try {
-			logFile = new FileWriter("./log-" + formatter.format(oggi) + ".txt");
-			logFile.write(log);
-	    	logFile.close();
-	    	JOptionPane.showMessageDialog(null, "Log Salvato");
-		} catch (IOException e1) {
-			JOptionPane.showMessageDialog(null, "Non e' stato possibile salvare il log...");
-			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
-			e1.printStackTrace();
-			errore = true;
-		}
+    	
+    	if (log.length() > 0) {
+    		try {
+    			logFile = new FileWriter("./log-" + formatter.format(oggi) + ".txt");
+    			logFile.write(log);
+    	    	logFile.close();
+    	    	JOptionPane.showMessageDialog(null, "Log Salvato");
+    		} catch (IOException e1) {
+    			JOptionPane.showMessageDialog(null, "Non e' stato possibile salvare il log...");
+    			logTextArea.append("\n\n[ERRORE] ==> " + e1.getMessage() + "\n\n");
+    			e1.printStackTrace();
+    			errore = true;
+    		}
+    	}else {
+			JOptionPane.showMessageDialog(null, "Il log e' vuoto, non e' stato salvato");
+
+    	}
+		
 	
     }
 

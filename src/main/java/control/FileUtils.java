@@ -126,7 +126,10 @@ public class FileUtils {
 
 	
 	
-	
+	/**
+	 * 
+	 * @return lista contenente tutte le email
+	 */
 	public static Map<String, String> getAllEmail() {
 		URL url  = null;
 		BufferedReader in = null;

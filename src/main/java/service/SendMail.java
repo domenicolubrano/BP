@@ -91,7 +91,6 @@ public class SendMail {
 	
 	
 	// corpo della mail
-
 	String msg = "Buongiorno,<br>" + 
 			"\r\n" + 
 			"Invio in allegato buste paga  come in oggetto.<br><br>" + 
