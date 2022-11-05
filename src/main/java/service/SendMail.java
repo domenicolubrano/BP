@@ -26,12 +26,6 @@ public class SendMail {
 
 	public static void send(String destinatario, String oggetto, String allegato){
 
-//		if(destinatario.equalsIgnoreCase("null") == false) {
-//			GUI.errore = true;
-//			GUI.logTextArea.append(" [ERRORE] ==> seeeeeeeeeeeeee\n\n");
-//			return;
-//		}	
-//		
 	Properties prop = new Properties();
 	
 	prop.put("mail.smtp.auth", true);
@@ -67,6 +61,8 @@ public class SendMail {
 		e1.printStackTrace();
 		GUI.errore = true;
 	}
+	
+
 
 	
 	// destinatario della mail
@@ -79,6 +75,7 @@ public class SendMail {
 		e1.printStackTrace();
 		GUI.errore = true;
 	}
+
 
 	
 	// oggetto della mail
@@ -94,6 +91,7 @@ public class SendMail {
 	
 	
 	// corpo della mail
+
 	String msg = "Buongiorno,<br>" + 
 			"\r\n" + 
 			"Invio in allegato buste paga  come in oggetto.<br><br>" + 
@@ -123,7 +121,7 @@ public class SendMail {
 			"\r\n" + 
 			"Il presente messaggio e gli eventuali suoi allegati sono di natura aziendale, prevalentemente confidenziale e sono visionabili solo dal destinatario di posta elettronica. La risposta o l&#39;eventuale invio spontaneo da parte vostra di e-mail al nostro indirizzo potrebbero non assicurare la confidenzialita&#39; potendo essere viste da altri soggetti appartenenti all&#39;Azienda oltre che al firmatario della presente, per finalit&agrave; di sicurezza informatica, amministrative e allo scopo del continuo svolgimento dell&#39;attivit&agrave; aziendale. Qualora questo messaggio vi fosse pervenuto per errore, vi preghiamo di cancellarlo dal vostro sistema e vi chiediamo di volercene dare cortesemente comunicazione al mittente.\r\n<br>" + 
 			"\r\n" + 
-			"La Vs. mail &egrave; in ns. possesso in quanto da Voi fornitaci tramite comunicazione scritta, telefonica, telematica o direttamente oralmente. Essa &egrave; utilizzata esclusivamente per fornirVi informazioni sulla ns. attivit&agrave; e sui servizi da noi offerti. Non sar&agrave; ceduta a terzi in nessun caso salvo approvazione da parte Vostra. Il Titolare del trattamento &egrave;  <b>TRE EMME ENGINEERING S.R.L.</b> I ns. sistemi informativi e le ns. procedure interne sono conformi alle norme e garantiamo la presenza di adeguate misure tecniche ed organizzative costantemente aggiornate.<br>\r\n" + 
+			"La Vs. mail &egrave; in ns. possesso in quanto da Voi fornitaci tramite comunicazione scritta, telefonica, telematica o direttamente oralmente. Essa &egrave; utilizzata esclusivamente per fornirVi informazioni sulla ns. attivit&agrave; e sui servizi da noi offerti. Non sar&agrave; ceduta a terzi in nessun caso salvo approvazione da parte Vostra. Il Titolare del trattamento &egrave;ï¿½ï¿½<b>TRE EMME ENGINEERING S.R.L.</b> I ns. sistemi informativi e le ns. procedure interne sono conformi alle norme e garantiamo la presenza di adeguate misure tecniche ed organizzative costantemente aggiornate.<br>\r\n" + 
 			"\r\n" + 
 			"E' possibile in qualsiasi momento richiedere la cancellazione della Vs. mail tramite il semplice invio di una mail a.info@3em.it"
 			+"</sub>";
@@ -173,7 +171,7 @@ public class SendMail {
 		GUI.errore = true;
 	}
 	
-	
+
 	// invio messaggio
 	try {
 		Transport.send(message);
@@ -185,6 +183,7 @@ public class SendMail {
 	}
 	
 	
+
 
 	
 }

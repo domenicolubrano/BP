@@ -235,6 +235,7 @@ public class GUI extends JFrame implements ActionListener {
        
         jMenuBar1.add(settingMenu);
         jMenuBar1.add(helpMenu);
+
         jMenuBar1.setBackground(new Color(22,158,255));
         frame.setJMenuBar(jMenuBar1);
         
@@ -252,12 +253,6 @@ public class GUI extends JFrame implements ActionListener {
     }
     
     
-
-
-	
-
-
-
 
 	// invia BP premuto
     private void bottoneActionPerformed(ActionEvent e) {                                          
@@ -326,6 +321,7 @@ public class GUI extends JFrame implements ActionListener {
     private void saveLogActionPerformed(ActionEvent e) {
     	String log = logTextArea.getText();
     	
+
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH.mm.ss");  
     	LocalDateTime oggi = LocalDateTime.now();  
 
@@ -349,6 +345,7 @@ public class GUI extends JFrame implements ActionListener {
 		new ImpostazioniGUI();
 		
 	}
+
     
     
     // scarica guida premuto
@@ -368,6 +365,7 @@ public class GUI extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}		
 	}
+
 
     
     // azione generale effettuata

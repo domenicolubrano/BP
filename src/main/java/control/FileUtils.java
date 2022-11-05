@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.text.WordUtils;
-
 import service.GUI;
 
 public class FileUtils {
 	
+
 	private static String urlFile = "https://raw.githubusercontent.com/domenicolubrano/BP/main/src/main/resources/mail.csv"; // file con tutte le email
 	public static String urlGuida = "https://github.com/domenicolubrano/BP/files/9937694/Guida.Buste.Paga.Sender.pdf"; // url alla guida
+
 	
 	/**
 	 * 
@@ -72,7 +72,7 @@ public class FileUtils {
 			String nome = n[2].replace(".pdf", "");
 			nome  = nome.trim();
 			nome = WordUtils.capitalizeFully(nome);
-			
+
 			nome = Normalizer.normalize(nome, Normalizer.Form.NFD);
 			nome = nome.replaceAll("[^\\p{ASCII}]", "");
 			nome = nome.replaceAll("\\p{M}", "");

@@ -13,10 +13,12 @@ public class Testing {
 		
 		String oggetto = "Test Domenico Lubrano";
 		String percorso = "C:\\Users\\Fin\\Desktop\\buste\\";
+
 		
 		for (Entry<String, String> entry : data.entrySet()) {
 		    String list = entry.getKey();
 		    
+
 		    File myObj = new File(percorso + "1- " + oggetto + " - " + list + ".pdf");
 		    
 		    try {
@@ -26,10 +28,12 @@ public class Testing {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		    
-		  
+
+		}
+		
+
 		
 	}
 
 }
-}
+
