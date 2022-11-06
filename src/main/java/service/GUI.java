@@ -7,13 +7,16 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -21,6 +24,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -32,6 +36,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
@@ -47,6 +52,7 @@ public class GUI extends JFrame implements ActionListener {
     public static JTextArea logTextArea = new JTextArea();
     private static JLabel labelTitolo = new JLabel();
     private static JSeparator separatore = new JSeparator();
+    private static JProgressBar barraProgresso = new JProgressBar();
     private static JLabel labelIstruzioni = new JLabel();
     private static JLabel labelIstruzioni1 = new JLabel();
     private static JLabel labelIstruzioni2 = new JLabel();
@@ -114,7 +120,20 @@ public class GUI extends JFrame implements ActionListener {
         labelTitolo.setText("Invia Buste Paga");
         labelTitolo.setFont(new Font("Leelawadee UI", 1, 25));
         labelTitolo.setForeground(new Color(22,158,255));
-
+        // icona titolo
+        Image image = null;
+        URL url;
+		try {
+			url = new URL("https://github.com/TreeEmmeDev/Gestione-Candidature/blob/main/src/main/webapp/img/logo.png?raw=true");
+			image = ImageIO.read(url);
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ImageIcon imageIcon = new ImageIcon(new ImageIcon(image).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
+        labelTitolo.setIcon(imageIcon);
+         
         panel.add(labelTitolo);
         
         
@@ -143,6 +162,8 @@ public class GUI extends JFrame implements ActionListener {
         labelSuccess.setVisible(false);
         panel.add(labelSuccess);
         
+        panel.add(barraProgresso);
+        
         // layout
         GroupLayout layout = new GroupLayout(panel);
         layout.setHorizontalGroup(
@@ -158,6 +179,7 @@ public class GUI extends JFrame implements ActionListener {
                     .addComponent(labelIstruzioni1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelIstruzioni2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelSuccess, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(barraProgresso, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                             .addGap(0, 0, Short.MAX_VALUE)
                             .addComponent(saveLog))
@@ -181,10 +203,13 @@ public class GUI extends JFrame implements ActionListener {
                 .addComponent(button)
                 .addGap(24, 24, 24)
                 .addComponent(pannelloScroll, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                .addComponent(barraProgresso, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addComponent(saveLog)
                 .addContainerGap())
         );
         panel.setLayout(layout);
+        
+        barraProgresso.setForeground(new Color(22,158,255));
         
         // set icona
         ImageIcon img = new ImageIcon();
@@ -200,11 +225,13 @@ public class GUI extends JFrame implements ActionListener {
         
         // menu bar
         settingMenu.setText("Impostazioni");
+        settingMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
         settingMenu.setFont(new Font("Arial", 1, 15));
         settingMenu.setBackground(new Color(22,158,255));
         settingMenu.setForeground(new Color(255,255,255));
 
         accountSettings.setText("Account");
+        accountSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
         accountSettings.setFont(new Font("Arial", 1, 15));
         accountSettings.setBackground(new Color(22,158,255));
         accountSettings.setForeground(new Color(255,255,255));
@@ -216,12 +243,14 @@ public class GUI extends JFrame implements ActionListener {
         settingMenu.add(accountSettings);
         
         helpMenu.setText("Guida");
+        helpMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
         helpMenu.setFont(new Font("Arial", 1, 15));
         helpMenu.setBackground(new Color(22,158,255));
         helpMenu.setForeground(new Color(255,255,255));
         
         
         scaricaGuida.setText("Scarica Guida");
+        scaricaGuida.setCursor(new Cursor(Cursor.HAND_CURSOR));
         scaricaGuida.setFont(new Font("Arial", 1, 15));
         scaricaGuida.setBackground(new Color(22,158,255));
         scaricaGuida.setForeground(new Color(255,255,255));
@@ -261,10 +290,13 @@ public class GUI extends JFrame implements ActionListener {
     	button.setBorderPainted(false);
     	button.setFocusPainted(false);
     	
-    	
+    	barraProgresso.setValue(0);
 	  
 	    // get nomi da file
 	    List<String> files = FileUtils.getFileName(new File("."));  // ricerca file
+	    barraProgresso.setMaximum(files.size());
+	    int contaFileFatti = 0;
+	    
 	    logTextArea.append("\n [INFO] -> Nessun altro file trovato\n\n");
 	        
 	    for (String file : files) {	
@@ -276,6 +308,11 @@ public class GUI extends JFrame implements ActionListener {
 	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...");
 
 	        SendMail.send(email, oggetto, file);
+	        
+	        contaFileFatti++;
+	        barraProgresso.setValue(contaFileFatti);
+	        button.setText("Invia Buste Paga presenti nella cartella (" + contaFileFatti + ")");
+	        
 	        if(errore == false) {
 	        	try {
 					Files.move(Paths.get(file), Paths.get("Inviate/" + file), StandardCopyOption.REPLACE_EXISTING);
@@ -283,10 +320,7 @@ public class GUI extends JFrame implements ActionListener {
 					e1.printStackTrace();
 					logTextArea.append("\n [INFO] -> Non e stato possibile spostare il file inviato(" + file + ")\n [ERRORE] -> " + e1.getMessage());
 				}
-	        }
-	        
-	       
-	        
+	        }     
 	        
 	    }
 	    
@@ -313,6 +347,7 @@ public class GUI extends JFrame implements ActionListener {
 	    
 	    button.setBorderPainted(true);
     	button.setFocusPainted(true);
+    	button.setText("Invia Buste Paga presenti nella cartella");
     }
     
     
