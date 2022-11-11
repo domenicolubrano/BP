@@ -78,10 +78,10 @@ public class FileUtils {
 			nome = nome.replaceAll("[^\\p{ASCII}]", "");
 			nome = nome.replaceAll("\\p{M}", "");
 
-			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: " + nome + "\n\n");
+			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: " + nome + "\n");
 			return nome;
 		}catch(Exception e) {
-			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: NULL\n\n");
+			GUI.logTextArea.append(" [INFO] ==> Il nome trovato e: NULL\n");
 			return "NULL";
 
 		}

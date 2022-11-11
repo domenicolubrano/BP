@@ -50,6 +50,7 @@ public class GUI extends JFrame implements ActionListener {
     private static JFrame frame = new JFrame();
     private static JScrollPane pannelloScroll = new JScrollPane();
     public static JTextArea logTextArea = new JTextArea();
+    public static boolean erroreSingolo;
     private static JLabel labelTitolo = new JLabel();
     private static JSeparator separatore = new JSeparator();
     private static JProgressBar barraProgresso = new JProgressBar();
@@ -300,12 +301,12 @@ public class GUI extends JFrame implements ActionListener {
 	    logTextArea.append("\n [INFO] -> Nessun altro file trovato\n\n");
 	        
 	    for (String file : files) {	
-	    	
+	    	erroreSingolo = false;
 	        String oggetto = FileUtils.getOggettoMail(file);
 	        String nominativo = FileUtils.getNominativo(file);
 	        String email = FileUtils.getEmail(nominativo);
 	        
-	        logTextArea.append("\n [INFO] -> Invio email a " + email + " in corso...");
+	        logTextArea.append(" [INFO] -> Invio email a " + email + " in corso...\n");
 
 	        SendMail.send(email, oggetto, file);
 	        
@@ -313,7 +314,7 @@ public class GUI extends JFrame implements ActionListener {
 	        barraProgresso.setValue(contaFileFatti);
 	        button.setText("Invia Buste Paga presenti nella cartella (" + contaFileFatti + ")");
 	        
-	        if(errore == false) {
+	        if(erroreSingolo == false) {
 	        	try {
 					Files.move(Paths.get(file), Paths.get("Inviate/" + file), StandardCopyOption.REPLACE_EXISTING);
 				} catch (IOException e1) {

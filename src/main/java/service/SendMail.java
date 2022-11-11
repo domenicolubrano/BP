@@ -55,11 +55,11 @@ public class SendMail {
 	} catch (AddressException e1) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	} catch (MessagingException e1) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 	
 
@@ -73,7 +73,7 @@ public class SendMail {
 	} catch (Exception e1) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e1.getMessage() + "\n\n");
 		e1.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 
 
@@ -85,7 +85,7 @@ public class SendMail {
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 
 	
@@ -136,7 +136,7 @@ public class SendMail {
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 	Multipart multipart = new MimeMultipart();
 	try {
@@ -144,14 +144,14 @@ public class SendMail {
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 	try {
 		message.setContent(multipart);
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 
 	
@@ -163,11 +163,11 @@ public class SendMail {
 	} catch (IOException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 	
 
@@ -178,7 +178,7 @@ public class SendMail {
 	} catch (MessagingException e) {
 		GUI.logTextArea.append(" [ERRORE] ==> " + e.getMessage() + "\n\n");
 		e.printStackTrace();
-		GUI.errore = true;
+		GUI.errore = true; GUI.erroreSingolo = true;
 	}
 	
 	
